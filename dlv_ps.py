@@ -34,7 +34,7 @@
 # from dlv_ps import DLV_I2C
 # i2c=I2C(1)
 # dlv = DLV_I2C(i2c)
-# pressure, temperature = dlv.measure()
+# pressure, temperature, status = dlv.measure()
 #
 
 

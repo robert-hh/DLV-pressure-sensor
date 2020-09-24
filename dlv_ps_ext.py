@@ -30,7 +30,7 @@
 # from dlv_ps import DLV_I2C
 # i2c=I2C(1)
 # dlv = DLV_I2C(i2c)
-# pressure, temperature = dlv.measure()
+# pressure, temperature, status = dlv.measure()
 #
 #
 # Sample usage SPI interface, S type power mode:
@@ -40,7 +40,7 @@
 # from dlv_ps import DLV_SPI
 # dlv = DLV_SPI((Pin("D1", Pin.OUT), Pin("D11", Pin.IN), Pin("D3", Pin.OUT),),
 #               sleep_mode=True)
-# pressure, temperature = dlv.measure()
+# pressure, temperature, status = dlv.measure()
 #
 
 import time
