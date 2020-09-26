@@ -71,8 +71,7 @@ class DLV_PS:
         self.scaling, self.offset =  self._models[model.upper()] # set defaults
         if offset is not None:
             self.offset = offset
-        self.scaling = 1.25 * self.scaling / 16384  # precalulate the coefficients
-        self.offset *= self.scaling
+        self.scaling = 1.25 * self.scaling / 16384  # precalulate the coefficient
 
         self.data = bytearray(4)
         self.data2 = bytearray(2)
@@ -98,7 +97,7 @@ class DLV_PS:
 # convenience functions returning the raw to cooked values; used internally too
 #
     def psi(self, pressure):
-        return pressure * self.scaling - self.offset
+        return (pressure - self.offset) * self.scaling
 
     def celsius(self, temperature):
         return temperature * 0.097704 - 50  # 0.097704 = 200 / (2**11 - 1)
