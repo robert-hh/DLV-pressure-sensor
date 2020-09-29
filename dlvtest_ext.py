@@ -26,6 +26,7 @@ import dlv_ps_ext as dlv_ps
 
 from machine import I2C
 i2c=I2C(-1, scl=Pin(25), sda=Pin(26), freq=400000) ## ESP32 Soft
+# i2c=I2C(1, scl=Pin(25), sda=Pin(26), freq=400000) ## ESP32 Hard
 
 # i2c=I2C(scl=Pin(5), sda=Pin(4), freq=400000) ## ESP8266 Soft
 

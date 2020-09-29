@@ -110,6 +110,7 @@ The basic and extended drivers were successfully tested with:
 - Pyboard D, Soft I2C interface, genuine Micropython
 - Pyboard D, Hard I2C interface, genuine Micropython
 - ESP32, Soft I2C interface, genuine Micropython
+- ESP32, Hard I2C interface, genuine Micropython
 - ESP32, SPI interface (sensor simulation), genuine Micropython
 - ESP32, Pin bitbang interface (sensor simulation), genuine Micropython
 - ESP8266, I2C interface, genuine Micropython
@@ -125,7 +126,7 @@ of 200Hz (!) compared to 60µs with I2C and ~400kHz.
 
 The pin bitbang interface was not tested on Pyboard, ESP8266 and W600. These should
 work the same way as on the ESP32, and are not needed, since all these boards support
-genuine SPI. The Hardware SPI on ESP32 did not work at all
+genuine SPI.
 
 A long run test was made with the sensor, capturin 1 million samples over 13 hours. There
 were no false readings and a small amount of noise equivalent to 1-2 bits. In the test
