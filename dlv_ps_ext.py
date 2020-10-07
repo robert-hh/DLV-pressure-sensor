@@ -57,7 +57,7 @@ class DLV_PS:
                 "030G": (30.0, 1638),
                 "060G": (60.0, 1638),
                 "015A": (15.0, 1638),
-                "030A": (30.0, 1638),        
+                "030A": (30.0, 1638),
               }
 
 
@@ -75,6 +75,13 @@ class DLV_PS:
 
         self.data = bytearray(4)
         self.data2 = bytearray(2)
+
+        try: ## test for working i2c.start() method
+            self.i2c.start()
+            self.i2c.stop()
+            self.i2c_raw = True
+        except:
+            self.i2c_raw = False
 
     def measure(self, all=True, cooked=True):
         self.read_data(all)
@@ -131,13 +138,13 @@ class DLV_I2C(DLV_PS):
         self.i2c = i2c
         self.sleep_mode = sleep_mode
         self.address = bytearray(1)
-        self.address[0] = self._I2C_ADDRESS << 1
+        self.address[0] = (self._I2C_ADDRESS << 1) | 1
         super().__init__(model, offset)
 
     def read_data(self, all):
         if self.sleep_mode:  # Start cmd only in sleep mode
             if all:
-                if hasattr(i2c, "start"):  # can do primitive operations
+                if self.i2c_raw:  # can do primitive operations
                     self.i2c.start()
                     self.i2c.write(self.address)
                     self.i2c.stop()

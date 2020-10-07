@@ -25,9 +25,9 @@ import time
 import dlv_ps_min as dlv_ps
 
 from machine import I2C
-i2c=I2C(1)  ## ESP32 Hard
+i2c=I2C(1) 
 
-dlv=dlv_ps.DLV_I2C(i2c, offset=8192)
+dlv=dlv_ps.DLV_I2C(i2c)
 
 def run():
 
