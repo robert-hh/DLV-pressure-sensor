@@ -102,6 +102,18 @@ Convert the supplied celsius temperature value into a degree Kelvin value.
 
 Convert the supplied celsius temperature value into a degree Fahrenheit value.
 
+### **dlv.lowpass_init(start_value, time_constant)**
+
+Set up the lowpass filter with a start value and a time constant. The default
+values are 0 and 0.1.
+
+### **filtered = dlv.lowpass(sample)**
+
+Return the first order low-pass filtered value of the actual sample.
+The time-constant of the filter has to be set in advance with lowpass_init.
+In order to speed up the settling time is advisable to inititalize the
+lowpass filter with a value in the range of the expected series
+
 ## **Test coverage**
 
 The basic and extended drivers were successfully tested with:
@@ -121,19 +133,19 @@ The basic and extended drivers were successfully tested with:
 - Teensy 4.0, Circuitpython (only dlv_ps.py)
 
 The pin bitbang method for XBEE 3 creates proper signals, but is way too slow to
-be usesful. The data tranfer takes 160ms at the fastest achievable clock frequency
+be useful. The data tranfer takes 160ms at the fastest achievable clock frequency
 of 200Hz (!) compared to 60µs with I2C and ~400kHz.
 
 The pin bitbang interface was not tested on Pyboard, ESP8266 and W600. These should
 work the same way as on the ESP32, and are not needed, since all these boards support
 genuine SPI.
 
-A long run test was made with the sensor, capturin 1 million samples over 13 hours. There
+A long run test was made with the sensor, capturing three sets of 1 million samples
+1.5 Milliion samples and 1 Million samples over 13 - 24 hours. There
 were no false readings and a small amount of noise equivalent to 1-2 bits. In the test
-range of values, about every 4th code was missing, 1444 of 5646. Of the
+range values of first 1 million samples, about every 4th code was missing, 1444 of 5646. Of the
 high order 13 bits, 32 codes were missing. Of the 12 bits values all codes were present.
-
-
+The other two test sets showed similar behaviour.
 
 
 ## **Examples**
@@ -146,9 +158,9 @@ from machine import I2C
 from dlv_ps import DLV_I2C
 
 i2c=I2C(1)
-dlv = DLV_I2C(i2c)
+dlv = DLV_I2C(i2c, offset=1663)
 
-pressure, temperature, status = dlv.measure(offset=1663)
+pressure, temperature, status = dlv.measure()
 ```
 
 ```
