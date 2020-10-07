@@ -83,11 +83,11 @@ def run(readall=True):
                     print(i, p, last_p - p, dlv.psi(p), s)
             last_p = p
             time.sleep(0.1)
-        except RuntimeError:
-            print("Runtime Error")
-            time.sleep(0.1)
         except KeyboardInterrupt:
             break
+        except Exception as err:
+            print("Error: ", err)
+            time.sleep(0.1)
         # if input("Next: ") == "q":
             # break
 
